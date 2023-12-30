@@ -6,6 +6,7 @@
 # Between 16-19: requires mixed case letters
 # 20+: any characters desired
 
+# Note: symbol suport list [!@#$%^&*()-+/.,':;<>=?]
 sub validate {
     $passwd = shift;
     if (length($passwd) < 8) {
