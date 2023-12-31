@@ -38,6 +38,7 @@ func ParenthesisRemoval(expr string) string {
 		for _, op := range ops {
 			if op == expr[i] {
 				opIdx[op] = i
+				break
 			}
 		}
 
@@ -63,13 +64,13 @@ func ParenthesisRemoval(expr string) string {
 
 			redundant := false
 
-			// case for ((a+b))
+			// check case: ((a+b))
 			if (leftBracketIdx > 0) && (rightBracketIdx+1 < len(expr)) &&
 				(expr[leftBracketIdx-1] == '(') && (expr[rightBracketIdx+1] == ')') {
 				redundant = true
 			}
 
-			// case for (a)
+			// check case: (a)
 			if !isInBrackets['+'] && !isInBrackets['*'] && !isInBrackets['-'] && !isInBrackets['/'] {
 				redundant = true
 			}
