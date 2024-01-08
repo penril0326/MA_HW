@@ -77,7 +77,7 @@ func ParenthesisRemoval(expr string) string {
 				}
 			}
 
-			// check case: (a)
+			// check the case that no any ops in the brackets: (a)
 			if !isInBrackets['+'] && !isInBrackets['*'] && !isInBrackets['-'] && !isInBrackets['/'] {
 				redundant = true
 			}
