@@ -57,17 +57,24 @@ func ParenthesisRemoval(expr string) string {
 			// check which operator is in current brackets
 			isInBrackets := make(map[byte]bool)
 			for _, op := range ops {
-				if _, isExist := opIdx[op]; isExist {
+				if idx, isExist := opIdx[op]; isExist && (idx >= leftBracketIdx) {
 					isInBrackets[op] = true
 				}
 			}
 
 			redundant := false
 
-			// check case: ((a+b))
+			// check if there is other duplicated parenthesis outside: ((a+b))
 			if (leftBracketIdx > 0) && (rightBracketIdx+1 < len(expr)) &&
 				(expr[leftBracketIdx-1] == '(') && (expr[rightBracketIdx+1] == ')') {
 				redundant = true
+			} else {
+				// remove the op if it was be checked and there is no other outside duplicated parenthesis.
+				for op, _ := range isInBrackets {
+					if _, isExist := opIdx[op]; isExist {
+						delete(opIdx, op)
+					}
+				}
 			}
 
 			// check case: (a)

@@ -67,6 +67,48 @@ func TestParenthesisRemoval(t *testing.T) {
 			},
 			want: "c*(a+b)",
 		},
+		{
+			name: "9",
+			args: args{
+				expr: "-(2)-(2+3)",
+			},
+			want: "-2-(2+3)",
+		},
+		{
+			name: "10",
+			args: args{
+				expr: "2/(3)",
+			},
+			want: "2/3",
+		},
+		{
+			name: "11",
+			args: args{
+				expr: "(2)/(3)",
+			},
+			want: "2/3",
+		},
+		{
+			name: "12",
+			args: args{
+				expr: "(2*(3+4)*5)/6",
+			},
+			want: "2*(3+4)*5/6",
+		},
+		{
+			name: "13",
+			args: args{
+				expr: "1+(-1)",
+			},
+			want: "1+-1",
+		},
+		{
+			name: "14",
+			args: args{
+				expr: "((2*((2+3)-(4*6))+(8+(7*4))))",
+			},
+			want: "2*((2+3)-4*6)+8+7*4",
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
