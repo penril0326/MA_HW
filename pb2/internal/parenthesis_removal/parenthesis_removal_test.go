@@ -107,7 +107,7 @@ func TestParenthesisRemoval(t *testing.T) {
 			args: args{
 				expr: "((2*((2+3)-(4*6))+(8+(7*4))))",
 			},
-			want: "2*((2+3)-4*6)+8+7*4",
+			want: "2*(2+3-4*6)+8+7*4",
 		},
 	}
 	for _, tt := range tests {

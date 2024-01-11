@@ -66,7 +66,8 @@ func ParenthesisRemoval(expr string) string {
 
 			// check if there is other duplicated parenthesis outside: ((a+b))
 			if (leftBracketIdx > 0) && (rightBracketIdx+1 < len(expr)) &&
-				(expr[leftBracketIdx-1] == '(') && (expr[rightBracketIdx+1] == ')') {
+				((expr[leftBracketIdx-1] == '(') && (expr[rightBracketIdx+1] == ')') ||
+					(expr[leftBracketIdx-1] == '(' && ((nxt == '+') || (nxt == '-')))) {
 				redundant = true
 			} else {
 				// remove the op if it was be checked and there is no other outside duplicated parenthesis.
@@ -77,7 +78,7 @@ func ParenthesisRemoval(expr string) string {
 				}
 			}
 
-			// check the case that no any ops in the brackets: (a)
+			// check the case that no any ops in the current brackets: (a)
 			if !isInBrackets['+'] && !isInBrackets['*'] && !isInBrackets['-'] && !isInBrackets['/'] {
 				redundant = true
 			}
